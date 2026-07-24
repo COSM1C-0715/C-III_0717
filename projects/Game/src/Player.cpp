@@ -15,6 +15,8 @@ using namespace UniDx;
 namespace
 {
     const StringId CoinName = StringId::intern("Coin");
+
+    const float jumpSpeed = 5;
 }
 
 
@@ -30,7 +32,6 @@ void Player::OnEnable()
 void Player::Update()
 {
     const float moveSpeed = 5;
-
     // 操作方向
     Vector3 cont;
     if (Input::GetKey(Keyboard::A))
@@ -66,6 +67,14 @@ void Player::Update()
     Vector3 velocity = cont * moveSpeed * Quaternion::AngleAxis(camAngle, Vector3::up);
     float vAngle = std::atan2(velocity.x, velocity.z) * UniDx::Rad2Deg;
 
+    if (Input::GetKeyDown(Keyboard::Space))
+    {
+        velocity.y = jumpSpeed;
+    }
+    else
+    {
+        velocity.y = rb->linearVelocity.y;
+    }
     rb->linearVelocity = velocity;
     if (cont != Vector3::zero)
     {
