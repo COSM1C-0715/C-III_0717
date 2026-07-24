@@ -426,6 +426,30 @@ void MainGame::createMap()
 
     Transform::SetParent(move(floor), map->transform);
 
+    rb = make_unique<Rigidbody>();
+    rb->gravityScale = 0;
+    rb->mass = numeric_limits<float>::infinity();
+    floor = make_unique<GameObject>(u8"床",
+        CubeRenderer::create<VertexPNT>(floorMat),
+        move(rb),
+        make_unique<AABBCollider>());
+    floor->transform->localScale = Vector3(5, 1, 5);
+    floor->transform->localPosition = Vector3(0.0, -0.5f, -10.0);
+
+    Transform::SetParent(move(floor), map->transform);
+
+    rb = make_unique<Rigidbody>();
+    rb->gravityScale = 0;
+    rb->mass = numeric_limits<float>::infinity();
+    floor = make_unique<GameObject>(u8"床",
+        CubeRenderer::create<VertexPNT>(floorMat),
+        move(rb),
+        make_unique<AABBCollider>());
+    floor->transform->localScale = Vector3(5, 1, 5);
+    floor->transform->localPosition = Vector3(0.0, -0.5f, -15.0);
+
+    Transform::SetParent(move(floor), map->transform);
+
     // 壁
     rb = make_unique<Rigidbody>();
     rb->gravityScale = 0;
@@ -535,6 +559,18 @@ void MainGame::createMap()
         CubeRenderer::create<VertexPNT>(wallMat),
         move(rb),
         make_unique<AABBCollider>());
+    wall->transform->localScale = Vector3(5, 2.0f, 1);
+    wall->transform->localPosition = Vector3(0.0f, 0.5f,-11.0f);
+    
+    Transform::SetParent(move(wall), map->transform);
+
+    rb = make_unique<Rigidbody>();
+    rb->gravityScale = 0;
+    rb->mass = numeric_limits<float>::infinity();
+    wall = make_unique<GameObject>(u8"壁",
+        CubeRenderer::create<VertexPNT>(wallMat),
+        move(rb),
+        make_unique<AABBCollider>());
     wall->transform->localScale = Vector3(7.0f, 2, 1);
     wall->transform->localPosition = Vector3(8.0f, 0.5f, 0.0f);
     wall->transform->rotation = Quaternion::Euler(0.0f, 90.0f, 0.0f);
@@ -563,6 +599,19 @@ void MainGame::createMap()
         make_unique<AABBCollider>());
     wall->transform->localScale = Vector3(7.0f, 2, 1);
     wall->transform->localPosition = Vector3(-7.0f, 0.5f, 7.0f);
+    wall->transform->rotation = Quaternion::Euler(0.0f, 90.0f, 0.0f);
+
+    Transform::SetParent(move(wall), map->transform);
+
+    rb = make_unique<Rigidbody>();
+    rb->gravityScale = 0;
+    rb->mass = numeric_limits<float>::infinity();
+    wall = make_unique<GameObject>(u8"壁",
+        CubeRenderer::create<VertexPNT>(wallMat),
+        move(rb),
+        make_unique<AABBCollider>());
+    wall->transform->localScale = Vector3(7.0f, 2, 1);
+    wall->transform->localPosition = Vector3(2.0f, 0.5f, -7.0f);
     wall->transform->rotation = Quaternion::Euler(0.0f, 90.0f, 0.0f);
 
     Transform::SetParent(move(wall), map->transform);
